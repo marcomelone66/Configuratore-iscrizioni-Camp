@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Calcolo Camp</title>
+<style>
+body { font-family: Arial; padding: 30px; }
+input { margin: 5px; padding: 6px; width: 80px; }
+.box { display: inline-block; min-width: 120px; padding: 6px; background: #eee; margin-left: 10px; }
+#totale { font-size: 20px; margin-top: 15px; font-weight: bold; }
+</style>
+</head>
+
+<body>
+
+<h2>Calcolo importo camp</h2>
+
+<label>Numero settimane:</label>
+<input type="number" id="n1" min="1" oninput="aggiorna()">
+<span class="box" id="box1">€ 0</span>
+<br>
+
+<label>Numero fratelli:</label>
+<input type="number" id="n2" min="0" oninput="aggiorna()">
+<span class="box" id="box2">0%</span>
+<br>
+
+<label>Intendi pagare subito?</label>
+<input type="checkbox" id="pay" onchange="aggiorna()">
+<span class="box" id="box3">0%</span>
+
+<div id="totale">Totale: € 0</div>
+
+<div style="margin-top:15px;font-weight:bold;">
+  L'importo dovuto dovrà essere saldato come segue:
+</div>
+
+<div>
+  <span class="box" id="box5">€ 0</span>
+  all'atto della presente iscrizione
+</div>
+
+<div>
+  <span class="box" id="box6">€ 0</span>
+  <span id="scadenza"></span>
+</div>
+
+<script>
+function aggiorna() {
+  let settimane = Number(n1.value);
+  let fratelli = Number(n2.value);
+  let subito = pay.checked;
+
+  // IMPORTO BASE
+  let importo = 0;
+  if (settimane == 1) importo = 190;
+  else if (settimane == 2) importo = 365;
+  else if (settimane == 3) importo = 540;
+  else if (settimane == 4) importo = 700;
+  else if (settimane == 5) importo = 850;
+  else if (settimane == 6) importo = 1000;
+  else if (settimane == 7) importo = 1100;
+  else if (settimane > 7) importo = 0;
+
+  // SCONTO FRATELLI
+  let scontoFratelli = 0;
+  if (fratelli == 1) scontoFratelli = 5;
+  else if (fratelli >= 2) scontoFratelli = 10;
+  
+
+  // SCONTO PAGAMENTO SUBITO
+  let scontoSubito = subito ? 10 : 0;
+
+  // CALCOLO FINALE
+  let totaleSconto = (importo * scontoFratelli / 100) +
+                     (importo * scontoSubito / 100);
+
+  let totale = importo - totaleSconto;
+
+  // ACCONTO
+  let acconto = settimane * 20;
+  let saldo = totale - acconto;
+
+  // TESTO SCADENZA
+  let testo = subito
+    ? "entro il 31 marzo"
+    : "almeno entro 10 giorni dall'inizio della prima settimana";
+
+  // VISUALIZZA
+  box1.innerText = "€ " + importo.toFixed(2);
+  box2.innerText = scontoFratelli + "%";
+  box3.innerText = scontoSubito + "%";
+  document.getElementById("totale").innerText =
+    "Totale: € " + totale.toFixed(2);
+
+  box5.innerText = "€ " + acconto.toFixed(2);
+  box6.innerText = "€ " + saldo.toFixed(2);
+  document.getElementById("scadenza").innerText = testo;
+}
+</script>
+
+</body>
+</html>
