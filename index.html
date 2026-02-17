@@ -4,16 +4,28 @@
 <meta charset="UTF-8">
 <title>Calcolo Camp</title>
 <style>
-body { font-family: Arial; padding: 30px; }
+body { 
+  font-family: Arial; 
+  padding: 30px; 
+  background-color: #f0f0f0; /* grigio chiaro */
+}
 input { margin: 5px; padding: 6px; width: 80px; }
 .box { display: inline-block; min-width: 120px; padding: 6px; background: #eee; margin-left: 10px; }
+.capoverso {
+  font-weight: bold;
+  margin-bottom: 15px; /* spazio sotto il testo */
+}
 #totale { font-size: 20px; margin-top: 15px; font-weight: bold; }
 </style>
-</head>
+</head>	
 
 <body>
 
-<h2>Calcolo importo camp</h2>
+<body>
+
+   <img src="logo.png" alt="Logo Camp" style="width:150px; margin-bottom:20px;">
+
+<h2>Calcola l'importo dovuto</h2>
 
 <label>Numero settimane:</label>
 <input type="number" id="n1" min="1" oninput="aggiorna()">
@@ -29,13 +41,13 @@ input { margin: 5px; padding: 6px; width: 80px; }
 <input type="checkbox" id="pay" onchange="aggiorna()">
 <span class="box" id="box3">0%</span>
 
-<div id="totale">Totale: € 0</div>
+<div id="totale" style="margin-bottom:20px;">Totale: € 0</div>
 
-<div style="margin-top:15px;font-weight:bold;">
+<div style="font-weight:bold; margin-top:20px; margin-bottom:15px;">
   L'importo dovuto dovrà essere saldato come segue:
 </div>
 
-<div>
+<div style="margin-bottom:10px;">
   <span class="box" id="box5">€ 0</span>
   all'atto della presente iscrizione
 </div>
